@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyTest</title>
+<style>
+    body{
+        background-color: aquamarine;
+        text-align: center;
+        font-size: 30px;
+    }
+    .
+    div {
+        border: 1px solid black;
+        width: 200px;
+        height: 100px;
+        overflow: scroll;
+    }
+    .scroll-list {
+        overflow-y: auto;
+        height: 200px;
+        width: 300px;
+        border: 1px solid #000;
+        text-align: center;
+        margin: 0 auto;
+      }
+    .fruit {
+        width: 400px;
+        height: 200px;
+    }
+    .buttonClass {
+        width: 150px;
+        height: 40px;
+    }
+    input[type=checkbox] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #333;
+    }
+    input[type=checkbox]:checked {
+        background-color: #ffff00;
+    }
+    #status {
+        width: 100px;
+        height: 50px;
+        font-size: 16px;
+    }
+</style>
+<script type="text/javascript">
+var btn = document.getElementById("status");
+btn.onclick = changeText;
+function changeText(){
+	  btn.innerHTML = "文本被更新!";
+}
+var changeSizeNarrowBtn = document.getElementById("changeSizeNarrowBtn");
+changeSizeNarrowBtn.onclick = changeSizeNarrow;
+function changeSizeNarrow(){
+   document.getElementById("textarea1").cols="50";
+}
+var changeSizeWideBtn = document.getElementById("changeSizeWideBtn");
+changeSizeWideBtn.onclick = changeSizeWide;
+function changeSizeWide(){
+   document.getElementById("textarea1").cols="100";
+}
+function refreshDiv() {
+  document.getElementById("myDiv").innerHTML = "刷新后的内容";
+}
+
+var rightBtn = document.getElementById("right");
+rightBtn.onclick = changerRight;
+function changerRight(){
+   document.getElementById("position").style.position="absolute";
+   document.getElementById("position").style.left="60px";
+}
+var leftBtn = document.getElementById("left");
+leftBtn.onclick = changeLeft;
+function changeLeft(){
+   document.getElementById("position").style.position="absolute";
+   document.getElementById("position").style.left="10px";
+}
+</script>
+</head>
+<body>
+<p id="p1">Hello World!</p>
+<button id="status">文本更新</button>
+<br/>
+<input type="range" step="5" min="0" max="100" />
+<input id="scales" type="checkbox" name="scales" checked />
+<br/>
+<textarea id="textarea1" class="fruit">
+1 lemon 柠檬
+2 avocado 鳄梨/牛油果
+3 strawberry 草莓
+4 goji berry 枸杞
+5 mango 芒果
+6 pineapple 菠萝
+7 tangerine 柑橘
+8 banana 香蕉
+9 peach 桃子
+10 pear 梨
+11 apple 苹果
+12 orange 橙子
+13 melon 甜瓜
+14 watermelon 西瓜
+15 cherry tomato 小番茄
+16 chestnut 板栗
+17 longan 龙眼
+18 persimmon 柿子
+19 pomelo 柚子
+20 sugarcane 甘蔗
+21 dry fruit 干果
+22 fig 无花果
+23 olive 橄榄
+24 waxberry 杨梅
+25 papaya 木瓜
+26 jujube 红枣
+27 grape 葡萄
+28 grapefruit 葡萄柚
+29 lime 青柠/酸橙
+30 apricot 杏子
+</textarea>
+<ul class="scroll-list" id="itemList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+<br/>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+<h1>欢迎来到我的滚动网页</h1>
+</body>
+</html>
