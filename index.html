@@ -44,47 +44,29 @@
         background-color: #ffff00;
     }
     #status {
-        width: 100px;
+        width: 150px;
         height: 50px;
+        font-size: 16px;
+    }
+    #browserInfo {
         font-size: 16px;
     }
 </style>
 <script type="text/javascript">
-var btn = document.getElementById("status");
-btn.onclick = changeText;
-function changeText(){
-	  btn.innerHTML = "文本被更新!";
-}
-var changeSizeNarrowBtn = document.getElementById("changeSizeNarrowBtn");
-changeSizeNarrowBtn.onclick = changeSizeNarrow;
-function changeSizeNarrow(){
-   document.getElementById("textarea1").cols="50";
-}
-var changeSizeWideBtn = document.getElementById("changeSizeWideBtn");
-changeSizeWideBtn.onclick = changeSizeWide;
-function changeSizeWide(){
-   document.getElementById("textarea1").cols="100";
-}
-function refreshDiv() {
-  document.getElementById("myDiv").innerHTML = "刷新后的内容";
-}
+window.onload = function() {
+  var infoEle = document.getElementById("browserInfo");
+  infoEle.innerHTML = navigator.userAgent;
 
-var rightBtn = document.getElementById("right");
-rightBtn.onclick = changerRight;
-function changerRight(){
-   document.getElementById("position").style.position="absolute";
-   document.getElementById("position").style.left="60px";
-}
-var leftBtn = document.getElementById("left");
-leftBtn.onclick = changeLeft;
-function changeLeft(){
-   document.getElementById("position").style.position="absolute";
-   document.getElementById("position").style.left="10px";
+  var btn = document.getElementById("status");
+  btn.onclick = changeBtnText;
+  function changeBtnText(){
+    btn.innerHTML = "文本被更新!";
+  }
 }
 </script>
 </head>
 <body>
-<p id="p1">Hello World!</p>
+<p id="browserInfo">Hello World!</p>
 <button id="status">文本更新</button>
 <br/>
 <input type="range" step="5" min="0" max="100" />
