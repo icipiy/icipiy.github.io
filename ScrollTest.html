@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Window-target" content="_top">
+<meta name="robots" content="noindex">
+<title>ScrollTest</title>
+<style>
+    body{
+        background-color: aquamarine;
+        text-align: center;
+        font-size: 30px;
+    }
+    .
+    div {
+        border: 1px solid black;
+        width: 200px;
+        height: 100px;
+        overflow: scroll;
+    }
+    .scroll-list {
+        overflow-y: auto;
+        height: 200px;
+        width: 300px;
+        border: 1px solid #000;
+        text-align: center;
+        margin: 0 auto;
+      }
+    .fruit {
+        width: 400px;
+        height: 200px;
+    }
+    input[type=checkbox] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #333;
+        background-color: #ff0000;
+    }
+    input[type=checkbox]:checked {
+        background-color: #ffff00;
+    }
+</style>
+<script type="text/javascript">
+window.onload = function() {
+  var rangeInput = document.getElementById("rangeInput");
+  rangeInfo.innerHTML = rangeInput.value;
+  rangeInput.onchange = showRangeInfo;
+  function showRangeInfo() {
+    var rangeInput = document.getElementById("rangeInput");
+    var rangeInfo = document.getElementById("rangeInfo");
+    rangeInfo.innerHTML = rangeInput.value;
+  }
+}
+</script>
+</head>
+<body>
+<input type="range" step="5" min="0" max="100" value = "50" id="rangeInput" title="range"/>
+<span id="rangeInfo"></span>
+<br/>
+<br/>
+<input id="scales" type="checkbox" name="scales" title="checkbox" checked />
+<br/>
+<br/>
+<textarea id="textarea1" class="fruit" title="fruit" readonly>
+01 lemon 柠檬
+02 avocado 鳄梨/牛油果
+03 strawberry 草莓
+04 goji berry 枸杞
+05 mango 芒果
+06 pineapple 菠萝
+07 tangerine 柑橘
+08 banana 香蕉
+09 peach 桃子
+10 pear 梨
+11 apple 苹果
+12 orange 橙子
+13 melon 甜瓜
+14 watermelon 西瓜
+15 cherry tomato 小番茄
+16 chestnut 板栗
+17 longan 龙眼
+18 persimmon 柿子
+19 pomelo 柚子
+20 sugarcane 甘蔗
+21 dry fruit 干果
+22 fig 无花果
+23 olive 橄榄
+24 waxberry 杨梅
+25 papaya 木瓜
+26 jujube 红枣
+27 grape 葡萄
+28 grapefruit 葡萄柚
+29 lime 青柠/酸橙
+30 apricot 杏子
+</textarea>
+<br/>
+<br/>
+<ul class="scroll-list" id="itemList">
+    <li>Item 01</li>
+    <li>Item 02</li>
+    <li>Item 03</li>
+    <li>Item 04</li>
+    <li>Item 05</li>
+    <li>Item 06</li>
+    <li>Item 07</li>
+    <li>Item 08</li>
+    <li>Item 09</li>
+    <li>Item 10</li>
+    <li>Item 11</li>
+    <li>Item 12</li>
+    <li>Item 13</li>
+    <li>Item 14</li>
+    <li>Item 15</li>
+    <li>Item 16</li>
+    <li>Item 17</li>
+    <li>Item 18</li>
+    <li>Item 19</li>
+    <li>Item 20</li>
+    <li>Item 21</li>
+    <li>Item 22</li>
+    <li>Item 23</li>
+    <li>Item 24</li>
+    <li>Item 25</li>
+    <li>Item 26</li>
+    <li>Item 27</li>
+    <li>Item 28</li>
+    <li>Item 29</li>
+    <li>Item 30</li>
+    <li>Item 31</li>
+    <li>Item 32</li>
+</ul>
+<br/>
+<textarea id="textarea2" class="fruit" title="fruit">
+01 lemon 柠檬
+02 avocado 鳄梨/牛油果
+03 strawberry 草莓
+04 goji berry 枸杞
+05 mango 芒果
+06 pineapple 菠萝
+07 tangerine 柑橘
+08 banana 香蕉
+09 peach 桃子
+10 pear 梨
+11 apple 苹果
+12 orange 橙子
+13 melon 甜瓜
+14 watermelon 西瓜
+15 cherry tomato 小番茄
+16 chestnut 板栗
+17 longan 龙眼
+18 persimmon 柿子
+19 pomelo 柚子
+20 sugarcane 甘蔗
+21 dry fruit 干果
+22 fig 无花果
+23 olive 橄榄
+24 waxberry 杨梅
+25 papaya 木瓜
+26 jujube 红枣
+27 grape 葡萄
+28 grapefruit 葡萄柚
+29 lime 青柠/酸橙
+30 apricot 杏子
+</textarea>
+<br/>
+<p>01 There is no certainty in the world. This is the only certainty I have.</p>
+<p>02 There is no certainty in the world. This is the only certainty I have.</p>
+<p>03 There is no certainty in the world. This is the only certainty I have.</p>
+<p>04 There is no certainty in the world. This is the only certainty I have.</p>
+<p>05 There is no certainty in the world. This is the only certainty I have.</p>
+<p>06 There is no certainty in the world. This is the only certainty I have.</p>
+<p>07 There is no certainty in the world. This is the only certainty I have.</p>
+<p>08 There is no certainty in the world. This is the only certainty I have.</p>
+<p>09 There is no certainty in the world. This is the only certainty I have.</p>
+<p>10 There is no certainty in the world. This is the only certainty I have.</p>
+<p>11 There is no certainty in the world. This is the only certainty I have.</p>
+<p>12 There is no certainty in the world. This is the only certainty I have.</p>
+<p>13 There is no certainty in the world. This is the only certainty I have.</p>
+<p>14 There is no certainty in the world. This is the only certainty I have.</p>
+<p>15 There is no certainty in the world. This is the only certainty I have.</p>
+<p>16 There is no certainty in the world. This is the only certainty I have.</p>
+<p>17 There is no certainty in the world. This is the only certainty I have.</p>
+<p>18 There is no certainty in the world. This is the only certainty I have.</p>
+<p>19 There is no certainty in the world. This is the only certainty I have.</p>
+<p>20 There is no certainty in the world. This is the only certainty I have.</p>
+<p>21 There is no certainty in the world. This is the only certainty I have.</p>
+<p>22 There is no certainty in the world. This is the only certainty I have.</p>
+<p>23 There is no certainty in the world. This is the only certainty I have.</p>
+<p>24 There is no certainty in the world. This is the only certainty I have.</p>
+<p>25 There is no certainty in the world. This is the only certainty I have.</p>
+<p>26 There is no certainty in the world. This is the only certainty I have.</p>
+<p>27 There is no certainty in the world. This is the only certainty I have.</p>
+<p>28 There is no certainty in the world. This is the only certainty I have.</p>
+<p>29 There is no certainty in the world. This is the only certainty I have.</p>
+<p>30 There is no certainty in the world. This is the only certainty I have.</p>
+<p>31 There is no certainty in the world. This is the only certainty I have.</p>
+<p>32 There is no certainty in the world. This is the only certainty I have.</p>
+</body>
+</html>
