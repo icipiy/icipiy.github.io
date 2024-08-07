@@ -1,3 +1,3 @@
 # Preview
 
-[Mytest](https://icipiy.github.io/)
+[HtmlTest](https://icipiy.github.io/)
