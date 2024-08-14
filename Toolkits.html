@@ -46,8 +46,8 @@ window.onload = function() {
     browserInfo.innerHTML = navigator.userAgent;
   }
   var screenbutton = document.getElementById("showscreen");
-  screenbutton.onclick = showUserAgent;
-  function showUserAgent() {
+  screenbutton.onclick = showScreenInfo;
+  function showScreenInfo() {
     var browserInfo = document.getElementById("browserInfo");
     var info = "<span>";
     info += ("height: " + screen.height + "<br/>");
