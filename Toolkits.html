@@ -25,18 +25,46 @@
 </style>
 <script type="text/javascript">
 window.onload = function() {
-  var uastatus = false;
+
+  function objToJSON(obj) {
+    let cache = [];
+    let json = JSON.stringify(obj, (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (cache.includes(value)) return;
+        cache.push(value);
+      }
+      return value;
+    });
+    cache = null;
+    return json;
+  }
+
   var uabutton = document.getElementById("showua");
   uabutton.onclick = showUserAgent;
   function showUserAgent() {
     var browserInfo = document.getElementById("browserInfo");
-    if (uastatus) {
-      browserInfo.innerHTML = "";
-      uastatus = false;
-    } else {
-      browserInfo.innerHTML = navigator.userAgent;
-      uastatus = true;
+    browserInfo.innerHTML = navigator.userAgent;
+  }
+  var screenbutton = document.getElementById("showscreen");
+  screenbutton.onclick = showUserAgent;
+  function showUserAgent() {
+    var browserInfo = document.getElementById("browserInfo");
+    var info = "<span>";
+    info += ("height: " + screen.height + "<br/>");
+    info += ("width: " + screen.width + "<br/>");
+    info += ("availHeight: " + screen.availHeight + "<br/>");
+    info += ("availWidth: " + screen.availWidth + "<br/>");
+    info += ("availLeft: " + screen.availLeft + "<br/>");
+    info += ("availTop: " + screen.availTop + "<br/>");
+    info += ("colorDepth: " + screen.colorDepth + "<br/>");
+    info += ("pixelDepth: " + screen.pixelDepth + "<br/>");
+    info += ("isExtended: " + screen.isExtended + "<br/>");
+    if (screen.orientation != null) {
+      info += ("orientationAngle: " + screen.orientation.angle + "<br/>");
+      info += ("orientationType: " + screen.orientation.type + "<br/>");
     }
+    info += "</span>";
+    browserInfo.innerHTML = info;
   }
   console.log(frames);
   console.log(navigator);
@@ -49,7 +77,9 @@ window.onload = function() {
 <body>
 <button id="showua">User-Agent</button>
 <br/>
-<span id="browserInfo"></span>
+<button id="showscreen">Screen</button>
+<br/>
+<div id="browserInfo"></div>
 <br/>
 </body>
 </html>
