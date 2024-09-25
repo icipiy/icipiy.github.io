@@ -109,6 +109,11 @@ window.onload = function() {
   closeiFrameBtn.onclick = function() {
     iframeOverlay.style.display = 'none';
   }
+  
+  var openLinkBtn = document.getElementById('openLinkBtn');
+  openLinkBtn.onclick = function() {
+    window.location.href = 'https://www.baidu.com';
+  }
 
   var rangeInfo = document.getElementById("rangeInfo");
   var textareaLeft = document.getElementById("textareaLeft");
@@ -170,9 +175,10 @@ window.onload = function() {
   <button id="middleFont" style="width: 128px; height: 64px; font-size: 12px; padding: 8px 16px; border: 2px solid blue;">MidPad</button>
   <button id="largeFont" style="width: 128px; height: 64px; font-size: 12px; padding: 16px 32px; border: 2px solid orange;">LargePad</button>
   <br/>
-  <button id="openOverlayBtn">Overlay</button>
-  <a href="https://www.baidu.com" style="font-size: 16px;">百度超链接</a>
-  <button id="openiFrameBtn">iFrameOverlay</button>
+  <button id="openOverlayBtn" style="font-size: 16px;">Overlay</button>
+  <button id="openLinkBtn" style="font-size: 16px;">新页面</button>
+  <a href="https://www.baidu.com" style="font-size: 16px;">超链接</a>
+  <button id="openiFrameBtn" style="font-size: 16px;">iFrameOverlay</button>
   <br/><br/>
   <textarea id="textareaLeft" class="fruit" title="fruit">
     01 lemon 柠檬
