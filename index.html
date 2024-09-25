@@ -51,9 +51,65 @@
     input[type=checkbox]:checked {
         background-color: #ffff00;
     }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+    }
+    .popup {
+        margin: 60px auto;
+        padding: 10px;
+        background: #fff;
+        border-radius: 5px;
+        width: 80%;
+        position: relative;
+        z-index: 2;
+    }
+    .close {
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        color: red;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .close:hover, .close:focus {
+        color: red;
+    }
 </style>
 <script type="text/javascript">
 window.onload = function() {
+  var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  // overlay
+  var openOverlayBtn = document.getElementById('openOverlayBtn');
+  var closeOverlayBtn = document.getElementById('closeOverlayBtn');
+  var justOverlay = document.getElementById('justOverlay');
+  openOverlayBtn.onclick = function() {
+    justOverlay.style.display = 'block';
+  }
+  closeOverlayBtn.onclick = function() {
+    justOverlay.style.display = 'none';
+  }
+  // overlay with iframe
+  var iframeTest = document.getElementById('iframeTest');
+  iframeTest.width=windowWidth * 0.7;
+  iframeTest.height=windowHeight * 0.8;
+  var openiFrameBtn = document.getElementById('openiFrameBtn');
+  var closeiFrameBtn = document.getElementById('closeiFrameBtn');
+  var iframeOverlay = document.getElementById('iframeOverlay');
+  openiFrameBtn.onclick = function() {
+    iframeOverlay.style.display = 'block';
+  }
+  closeiFrameBtn.onclick = function() {
+    iframeOverlay.style.display = 'none';
+  }
+
   var rangeInfo = document.getElementById("rangeInfo");
   var textareaLeft = document.getElementById("textareaLeft");
   var textareaRight = document.getElementById("textareaRight");
@@ -90,21 +146,34 @@ window.onload = function() {
 </script>
 </head>
 <body>
+  <div id="justOverlay" class="overlay">
+    <div class="popup">
+      <span id="closeOverlayBtn" class="close">&times;</span>
+      <h1>This is an overlay layer</h1>
+    </div>
+  </div>
+  <div id="iframeOverlay" class="overlay">
+    <div class="popup">
+      <span id="closeiFrameBtn" class="close">&times;</span>
+      <span>This is an Overlay layer with iframe element</span>
+      <br/>
+      <iframe src="https://www.baidu.com/duty/yinsiquan.html" title="Test overlay with iframe" id="iframeTest" width="200" height="100"></iframe>
+      <br/>
+    </div>
+  </div>
   <input id="cbLeft" type="checkbox" name="scales" title="checkbox" />
   <input type="range" step="5" min="0" max="100" value = "50" id="rangeInput" title="range"/>
   <span id="rangeInfo"></span>
   <input id="cbRight" type="checkbox" name="scales" title="checkbox" checked />
   <br/><br/>
-  <button id="smallFont" style="width: 256px; height: 128px; font-size: 16px; padding: 2px 4px; border: 1px solid blue;">SmallPad</button>
-  <button id="middleFont" style="width: 256px; height: 128px; font-size: 16px; padding: 16px 32px; border: 1px solid blue;">MidPad</button>
-  <button id="largeFont" style="width: 256px; height: 128px; font-size: 16px; padding: 32px 64px; border: 1px solid blue;">LargePad</button>
-  <br/><br/>
-  <button id="buttonLeftScrollTop">Left Area Top</button>
-  <button id="buttonLeftScrollBottom">Left Area Bottom</button>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <button id="buttonRightScrollTop">Right Area Top</button>
-  <button id="buttonRightScrollBottom">Right Area Bottom</button>
+  <button id="smallFont" style="width: 128px; height: 64px; font-size: 12px; padding: 1px 2px; border: 2px solid red;">SmallPad</button>
+  <button id="middleFont" style="width: 128px; height: 64px; font-size: 12px; padding: 8px 16px; border: 2px solid blue;">MidPad</button>
+  <button id="largeFont" style="width: 128px; height: 64px; font-size: 12px; padding: 16px 32px; border: 2px solid orange;">LargePad</button>
   <br/>
+  <button id="openOverlayBtn">Overlay</button>
+  <a href="https://www.baidu.com" style="font-size: 16px;">百度超链接</a>
+  <button id="openiFrameBtn">iFrameOverlay</button>
+  <br/><br/>
   <textarea id="textareaLeft" class="fruit" title="fruit">
     01 lemon 柠檬
     02 avocado 鳄梨/牛油果
@@ -169,6 +238,12 @@ window.onload = function() {
     29 lime 青柠/酸橙
     30 apricot 杏子
   </textarea>
+  <br/>
+  <button id="buttonLeftScrollTop">Left Area Top</button>
+  <button id="buttonLeftScrollBottom">Left Area Bottom</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button id="buttonRightScrollTop">Right Area Top</button>
+  <button id="buttonRightScrollBottom">Right Area Bottom</button>
   <br/>
   <br/>
   <ul class="scroll-list" id="itemList">
