@@ -1,37 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Window Open Test</title>
-    <style>
-        a {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 3px;
-            margin: 10px;
-        }
-        a:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <a href="#" onclick="openNewWindow('https://www.baidu.com')">Open New Window</a>
-    <a href="#" onclick="openNewTab('https://www.baidu.com')">Open New Tab</a>
+<html>
 
-    <script>
-        function openNewWindow(url) {
-            window.open(url, 'baiduWindow', 'width=800,height=600');
-            return false;
-        }
-        function openNewTab(url) {
-            window.open(url, 'baiduTab');
-            return false;
-        }
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <title>Test Permission</title>
+  <style>
+    body {
+      width: 600px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .button-container {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result-list {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .result-item {
+      margin: 5px 0;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+      background-color: #f0f0f0;
+    }
+
+    .error-item {
+      background-color: #ffe6e6;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>媒体设备权限测试</h3>
+  <section class="button-section">
+    <button id="requestDisplayMedia">请求屏幕共享</button>
+    <button id="requestCamera">请求摄像头权限</button>
+    <button id="requestAudio">请求音频权限</button>
+    <button id="requestScreenRecording">请求屏幕录制</button>
+  </section>
+
+  <h3>特殊接口测试</h3>
+  <section class="button-section">
+    <button id="testWindowOpen">测试 window.open</button>
+    <button id="testWindowOpen2">测试 window.open(name)</button>
+  </section>
+
+  <h3>更多接口测试</h3>
+  <section class="button-section">
+    <button id="testAlert">测试 alert</button>
+    <button id="testConfirm">测试 confirm</button>
+    <button id="testPrompt">测试 prompt</button>
+  </section>
+  <div class="result-list" id="resultList">
+    <!-- 结果将显示在此处 -->
+  </div>
+
+  <script>
+    // normal.js
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('requestDisplayMedia').addEventListener('click', requestDisplayMedia);
+      document.getElementById('requestCamera').addEventListener('click', requestCamera);
+      document.getElementById('requestAudio').addEventListener('click', requestAudio);
+      document.getElementById('requestScreenRecording').addEventListener('click', requestScreenRecording);
+
+      document.getElementById('testWindowOpen').addEventListener('click', testWindowOpen);
+      document.getElementById('testWindowOpen2').addEventListener('click', testWindowOpen2);
+
+      document.getElementById('testAlert').addEventListener('click', testAlert);
+      document.getElementById('testConfirm').addEventListener('click', testConfirm);
+      document.getElementById('testPrompt').addEventListener('click', testPrompt);
+    });
+
+    async function requestDisplayMedia() {
+      navigator.mediaDevices.getDisplayMedia({ video: true })
+        .then((stream) => {
+          console.log('成功获取屏幕共享流:', stream);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: true,
+            mediaType: '屏幕共享'
+          });
+          stream.getTracks().forEach(track => track.stop());
+        })
+        .catch((error) => {
+          console.error('获取屏幕共享失败:', error);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: false,
+            mediaType: '屏幕共享',
+            error: error.message
+          });
+        });
+    }
+
+    async function requestCamera() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          console.log('成功获取视频流:', stream);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: true,
+            mediaType: '摄像头'
+          });
+          stream.getTracks().forEach(track => track.stop());
+        })
+        .catch((error) => {
+          console.error('获取视频流失败:', error);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: false,
+            mediaType: '摄像头',
+            error: error.message
+          });
+        });
+    }
+
+    async function requestAudio() {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          console.log('成功获取音频流:', stream);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: true,
+            mediaType: '麦克风'
+          });
+          stream.getTracks().forEach(track => track.stop());
+        })
+        .catch((error) => {
+          console.error('获取音频流失败:', error);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: false,
+            mediaType: '麦克风',
+            error: error.message
+          });
+        });
+    }
+
+    async function requestScreenRecording() {
+      navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+        .then((stream) => {
+          console.log('成功获取屏幕录制流:', stream);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: true,
+            mediaType: '屏幕录制'
+          });
+          stream.getTracks().forEach(track => track.stop());
+        })
+        .catch((error) => {
+          console.error('获取屏幕录制失败:', error);
+          displayResult({
+            type: 'MEDIA_RESULT',
+            success: false,
+            mediaType: '屏幕录制',
+            error: error.message
+          });
+        });
+    }
+
+    async function testAlert() {
+      try {
+        alert('这是一个测试alert');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'alert测试',
+          message: 'alert执行完成（可能无视觉效果）'
+        });
+      } catch (error) {
+        console.error('alert测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'alert测试',
+          error: error.message
+        });
+      }
+    }
+
+    async function testConfirm() {
+      try {
+        const result = confirm('这是一个测试confirm');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'confirm测试',
+          message: 'confirm执行完成',
+          details: `用户选择: ${result}`
+        });
+      } catch (error) {
+        console.error('confirm测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'confirm测试',
+          error: error.message
+        });
+      }
+    }
+
+    async function testPrompt() {
+      try {
+        const result = prompt('这是一个测试prompt', '默认值');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'prompt测试',
+          message: 'prompt执行完成',
+          details: `用户输入: ${result}`
+        });
+      } catch (error) {
+        console.error('prompt测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'prompt测试',
+          error: error.message
+        });
+      }
+    }
+
+    async function testWindowOpen() {
+      try {
+        const newWindow = window.open('https://www.baidu.com', '_blank');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'window.open测试',
+          message: newWindow ? '成功打开窗口' : '窗口对象为空'
+        });
+      } catch (error) {
+        console.error('window.open测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'window.open测试',
+          error: error.message
+        });
+      }
+    }
+
+    async function testWindowOpen2() {
+      try {
+        const newWindow = window.open('https://www.baidu.com', '_baidu_');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'window.open(name)测试',
+          message: newWindow ? '成功打开窗口' : '窗口对象为空'
+        });
+      } catch (error) {
+        console.error('window.open(name)测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'window.open测试',
+          error: error.message
+        });
+      }
+    }
+
+    function displayResult(result) {
+      const resultList = document.getElementById('resultList');
+      const resultItem = document.createElement('div');
+      resultItem.className = result.success ? 'result-item' : 'error-item';
+      resultItem.innerHTML = `
+        <strong>${result.success ? '成功' : '失败'} - ${result.mediaType}</strong><br>
+        <em>时间: ${new Date().toLocaleString()}</em>
+        ${result.message ? `<br>信息: ${result.message}` : ''}
+        ${result.details ? `<br>详情: ${result.details}` : ''}
+        ${result.error ? `<br>错误信息: ${result.error}` : ''}
+    `;
+      resultList.appendChild(resultItem);
+    }
+
+  </script>
 </body>
+
 </html>
