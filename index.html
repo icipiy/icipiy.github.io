@@ -6,8 +6,8 @@
   <title>Test Permission</title>
   <style>
     body {
-      width: 600px;
-      padding: 10px;
+      width: 800px;
+      padding: 8px;
       font-family: Arial, sans-serif;
     }
 
@@ -16,8 +16,8 @@
     }
 
     button {
-      padding: 8px;
-      margin: 5px;
+      padding: 6px;
+      margin: 3px;
       cursor: pointer;
       background-color: #4CAF50;
       color: white;
@@ -31,16 +31,16 @@
 
     .result-list {
       border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
+      padding: 6px;
+      margin-top: 6px;
       border-radius: 4px;
-      max-height: 400px;
+      max-height: 360px;
       overflow-y: auto;
     }
 
     .result-item {
-      margin: 5px 0;
-      padding: 5px;
+      margin: 3px 0;
+      padding: 3px;
       border-bottom: 1px solid #eee;
       background-color: #f0f0f0;
     }
@@ -52,7 +52,7 @@
 </head>
 
 <body>
-  <h3>媒体设备权限测试</h3>
+  <h3>媒体设备权限</h3>
   <section class="button-section">
     <button id="requestDisplayMedia">请求屏幕共享</button>
     <button id="requestCamera">请求摄像头权限</button>
@@ -60,13 +60,14 @@
     <button id="requestScreenRecording">请求屏幕录制</button>
   </section>
 
-  <h3>特殊接口测试</h3>
+  <h3>新窗口</h3>
   <section class="button-section">
-    <button id="testWindowOpen">测试 window.open</button>
-    <button id="testWindowOpen2">测试 window.open(name)</button>
+    <button id="testWindowOpen">window.open</button>
+    <button id="testWindowOpenTab">window.open(tab)</button>
+    <button id="testWindowOpenWindow">window.open(window)</button>
   </section>
 
-  <h3>更多接口测试</h3>
+  <h3>弹窗</h3>
   <section class="button-section">
     <button id="testAlert">测试 alert</button>
     <button id="testConfirm">测试 confirm</button>
@@ -77,8 +78,6 @@
   </div>
 
   <script>
-    // normal.js
-
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('requestDisplayMedia').addEventListener('click', requestDisplayMedia);
       document.getElementById('requestCamera').addEventListener('click', requestCamera);
@@ -86,7 +85,8 @@
       document.getElementById('requestScreenRecording').addEventListener('click', requestScreenRecording);
 
       document.getElementById('testWindowOpen').addEventListener('click', testWindowOpen);
-      document.getElementById('testWindowOpen2').addEventListener('click', testWindowOpen2);
+      document.getElementById('testWindowOpenTab').addEventListener('click', testWindowOpenTab);
+      document.getElementById('testWindowOpenWindow').addEventListener('click', testWindowOpenWindow);
 
       document.getElementById('testAlert').addEventListener('click', testAlert);
       document.getElementById('testConfirm').addEventListener('click', testConfirm);
@@ -263,21 +263,41 @@
       }
     }
 
-    async function testWindowOpen2() {
+    async function testWindowOpenTab() {
       try {
-        const newWindow = window.open('https://www.baidu.com', '_baidu_');
+        const newWindow = window.open('https://www.baidu.com', '_baidu_tab_');
         displayResult({
           type: 'MEDIA_RESULT',
           success: true,
-          mediaType: 'window.open(name)测试',
+          mediaType: 'window.open(tab)测试',
           message: newWindow ? '成功打开窗口' : '窗口对象为空'
         });
       } catch (error) {
-        console.error('window.open(name)测试失败:', error);
+        console.error('window.open(tab)测试失败:', error);
         displayResult({
           type: 'MEDIA_RESULT',
           success: false,
-          mediaType: 'window.open测试',
+          mediaType: 'window.open(tab)测试',
+          error: error.message
+        });
+      }
+    }
+
+    async function testWindowOpenWindow() {
+      try {
+        const newWindow = window.open('https://www.baidu.com', '_baidu_window_', 'x=80,y=60,width=800,height=600');
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: true,
+          mediaType: 'window.open(window)测试',
+          message: newWindow ? '成功打开窗口' : '窗口对象为空'
+        });
+      } catch (error) {
+        console.error('window.open(window)测试失败:', error);
+        displayResult({
+          type: 'MEDIA_RESULT',
+          success: false,
+          mediaType: 'window.open(window)',
           error: error.message
         });
       }
@@ -293,7 +313,7 @@
         ${result.message ? `<br>信息: ${result.message}` : ''}
         ${result.details ? `<br>详情: ${result.details}` : ''}
         ${result.error ? `<br>错误信息: ${result.error}` : ''}
-    `;
+      `;
       resultList.appendChild(resultItem);
     }
 
