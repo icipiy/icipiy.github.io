@@ -1,7 +1,7 @@
 {
   "name": "PMDA - Temp Converter",
   "short_name": "TempConv",
-  "start_url": "/",
+  "start_url": "/pwa",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#2962ff",
