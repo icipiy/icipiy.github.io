@@ -1,0 +1,11 @@
+{
+  "name": "PMDA - Temp Converter",
+  "short_name": "TempConv",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#2962ff",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
