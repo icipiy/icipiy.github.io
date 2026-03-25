@@ -4,18 +4,26 @@
   <title>FontFace</title>
   <style>
     @font-face {
+      font-family: 'Local TestSystemFont';
+      src: local('HarmonyOS Sans SC');
+    }
+    @font-face {
       font-family: 'Local HuaWenXingKai';
       src: local('STXingkai');
     }
-    .content {
-      font-family: 'Local HuaWenXingKai', serif;
-      font-size: 32px;
+    .content-system {
+      font-family: 'Local TestSystemFont', cursive;
+      font-size: 28px;
     }
+    .content-custom {
+      font-family: 'Local HuaWenXingKai', cursive;
+      font-size: 28px;
+    }
+
   </style>
 </head>
 <body>
-  <p class="content">这段文本使用自定义字体：华文行楷</p>
-  <p class="content">font-family: 'Local HuaWenXingKai'</p>
-  <p class="content">src: local('STXingkai')</p>
+  <p class="content-custom">这段文本指定了自定义字体：STXingkai, cursive</p>
+  <p class="content-system">这段文本指定了自定义字体：HarmonyOS Sans SC, cursive</p>
 </body>
 </html>
