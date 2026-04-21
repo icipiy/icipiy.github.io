@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本域 - 初始换行符示例</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 760px;
+            padding: 28px 32px 36px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 1.7rem;
+            margin: 0 0 0.35rem 0;
+            color: #1a2c3e;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2::before {
+            content: "📄";
+            font-size: 1.8rem;
+        }
+        .sub {
+            color: #4a627a;
+            border-left: 3px solid #3b82f6;
+            padding-left: 14px;
+            margin: 8px 0 24px 0;
+            font-size: 0.9rem;
+            font-weight: 450;
+        }
+        .textarea-container {
+            margin: 8px 0 12px;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: inset 0 1px 4px #0001, 0 2px 6px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s;
+        }
+        textarea {
+            width: 100%;
+            min-height: 280px;
+            padding: 18px 20px;
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 15px;
+            line-height: 1.55;
+            border: 1.5px solid #cfdfed;
+            border-radius: 20px;
+            background: #fefefe;
+            resize: vertical;
+            outline: none;
+            transition: all 0.2s;
+            color: #0f2b3d;
+            font-weight: 450;
+            letter-spacing: 0.2px;
+        }
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: #ffffff;
+        }
+        .info-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+            background: #f1f5f9;
+            padding: 12px 18px;
+            border-radius: 28px;
+            font-size: 0.85rem;
+            color: #1e3a5f;
+        }
+        .badge {
+            background: #e2e8f0;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #0c4a6e;
+        }
+        button {
+            background: #ffffff;
+            border: 1px solid #b9cfec;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #1f5e9e;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.02);
+        }
+        button:hover {
+            background: #eef3fc;
+            border-color: #7aa9d4;
+            color: #0f3b60;
+            transform: scale(0.97);
+        }
+        .status {
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+        }
+        hr {
+            margin: 16px 0 4px;
+            border: none;
+            border-top: 1px solid #cbdde9;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 22px;
+            color: #6c86a3;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>初始换行符 · Textarea</h2>
+    <div class="sub">页面打开时，文本域内容包含一个换行符 (<code>\n</code>) ，光标位于第二行起始位置。</div>
+
+    <div class="textarea-container">
+        <!-- 
+            初始内容设定为一个换行符：
+            方式1：直接在标签内部写一个换行（HTML会解析为换行符）
+            同时为了确保跨浏览器行为一致且显式表示，使用JavaScript设置初始值。
+            但为了符合“初始化为换行符”的严格语义，两种方式都保证内容是换行符。
+            这里采用: 内嵌一个换行 + JS保险初始化，确保无论加载快慢都是单一换行符。
+            注意：如果内嵌标签内已经有一个换行符，则JS重新赋值为"\n"不会重复换行。
+        -->
+        <textarea id="mainTextarea" placeholder="文本域初始包含换行符..."></textarea>
+    </div>
+
+    <div class="info-panel">
+        <div class="status">
+            <span class="badge" id="lineCountBadge">📊 行数: 计算中</span>
+            <span class="badge" id="charInfo">🔤 字符数(含换行): --</span>
+        </div>
+        <button id="showRawBtn" type="button">🔍 查看原始内容 (转义)</button>
+    </div>
+    <hr />
+    <footer>
+        ✅ 初始化内容为 <strong style="font-family: monospace;">"\\n"</strong> (换行符) — 你可以看到第一行为空，光标自动换至第二行。
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const textarea = document.getElementById('mainTextarea');
+        const lineCountSpan = document.getElementById('lineCountBadge');
+        const charInfoSpan = document.getElementById('charInfo');
+        const showRawBtn = document.getElementById('showRawBtn');
+
+        // 初始化文本内容为单个换行符
+        // 注意: 使用 value = "\n" 确保内容精确为一个换行符
+        // 同时避免内嵌文本可能导致的多个换行或者空白不一致
+        textarea.value = "\n";
+        
+        // 辅助函数：更新显示行数与字符信息
+        function updateStats() {
+            const content = textarea.value;
+            // 计算行数: 以换行符分割，注意最后一行可能没有换行符但依然算一行
+            // 但我们的内容初始为 "\n"，按照常规逻辑，lines = content.split(/\r?\n/).length
+            const lines = content.split(/\r?\n/);
+            let lineCount = lines.length;
+            // 边缘情况: 如果内容末尾是换行符，split后最后一个元素是空字符串，但行数应该保持不变，lines.length已经正确反映了行数
+            // 例如 "\n" -> split -> ["", ""] => length = 2, 符合预期：第一行空，第二行空(光标在第二行)
+            // 如果是 "\n\n" -> ["", "", ""] => 3行，符合
+            // 根据需求只需要初始化为单个换行符，显示统计供参考
+            const charCount = content.length;      // 包含换行符(\n计1个字符)
+            lineCountSpan.innerHTML = `📊 行数: ${lineCount}`;
+            charInfoSpan.innerHTML = `🔤 字符数(含换行): ${charCount}`;
+        }
+        
+        // 实时监听输入/改变，更新统计
+        textarea.addEventListener('input', updateStats);
+        textarea.addEventListener('change', updateStats);
+        
+        // 显示原始内容（将换行符转义为可见形式）
+        function showRawEscaped() {
+            const raw = textarea.value;
+            // 将换行符替换为 \n ，回车替换为 \r (这里只关心换行符)
+            let escaped = raw.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+            // 如果字符串为空，显示「空字符串」，但当前不可能为空，因为初始化至少有一个换行
+            if (escaped === '') escaped = '(空)';
+            alert(`📋 textarea 原始内容（转义显示）:\n\n“${escaped}”\n\n实际字符数: ${raw.length}  换行符数量: ${(raw.match(/\n/g) || []).length}`);
+        }
+        
+        showRawBtn.addEventListener('click', showRawEscaped);
+        
+        // 额外: 为了确保加载后光标位置合理（由于内容只有一个换行符，光标默认在文本开头或者视不同浏览器而定，
+        // 但通常光标会定位在第1行第1个字符之前，但由于换行符存在，光标视觉上在第二行开始？取决于渲染。但无伤大雅。
+        // 为了更好的演示效果，可以把光标移动到文本末尾（即换行符之后），让用户看到初始状态就是换行符效果。
+        // 但需求仅要求“文本内容初始化为换行符”，不强制光标位置，但为了直观，将光标定位到内容末尾，即换行符后面，
+        // 这样显示更清晰：有一个空行 + 光标在新行开头。但为了完全符合“初始化内容为换行符”，不做多余动作，
+        // 但为了让体验更好且不改变初始内容，可设置 setSelectionRange 把光标移到末尾，凸显换行效果。
+        // 完全可选，且不破坏“内容为换行符”原则。增加一个微小的 focus 光标位置优化。
+        // 用户可见第一行无文字，第二行闪烁光标。
+        window.addEventListener('load', function() {
+            // 再次确保初始化内容为换行符 (防止任何异常覆盖)
+            if (textarea.value !== "\n") {
+                textarea.value = "\n";
+            }
+            updateStats();
+            // 将光标设置在文本末尾（即换行符之后），这样清晰看到第二行是输入起始点
+            // 这不会改变文本内容，仅改变光标位置，让用户明确看到一个换行符已经存在。
+            textarea.focus();
+            const len = textarea.value.length;
+            if (len >= 0) {
+                textarea.setSelectionRange(len, len);
+            }
+        });
+        
+        // 如果用户手动清空全部内容（极端情况），可以显示警告但不必干涉，依然符合自由编辑。
+        // 但为了演示，不需要额外逻辑。
+        // 确保统计初始更新
+        updateStats();
+    })();
+</script>
+</body>
+</html>
+  
